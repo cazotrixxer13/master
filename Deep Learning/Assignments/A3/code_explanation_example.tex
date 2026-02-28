@@ -1,0 +1,74 @@
+\documentclass[]{article}
+\usepackage{tabularx}
+\usepackage{minted}
+
+
+\begin{document}
+
+\begin{titlepage}
+       \begin{center}
+             \begin{huge}
+				   %% Update assignment number here
+                   \textbf{Assignment 2}
+             \end{huge}
+       \end{center}
+
+       \begin{center}
+             \begin{large}
+                   Deep Learning KU, WS 2025/26
+             \end{large}
+       \end{center}
+
+       \begin{center}
+ \begin{tabularx}{\textwidth}{|>{\hsize=.33\hsize}X|>{\hsize=.33\hsize}X|>{\hsize=.33\hsize}X|} 
+
+                   \hline
+                   \multicolumn{3}{|c|}{\textbf{Team Members}} \\
+                   \hline
+                   Last name & First name & Matriculation Number \\
+                   \hline
+                   Anderson & Alice & 1500001 \\
+                   \hline
+                   Binford & Bob & 1600002 \\
+                   \hline
+
+             \end{tabularx}
+       \end{center}
+
+\end{titlepage}
+
+
+\pagebreak
+
+\subsection*{Example: Including Code and Explanation in the Report}
+
+\textbf{Task:} Create a character-wise encoding of the input text. Each unique character should be represented by a distinct integer.
+
+\medskip
+
+\noindent\textbf{Code Listing:}
+\begin{minted}[linenos]{python}
+# Create character mappings
+chars = sorted(list(set(text_data)))
+self.string_to_int = {ch: i for i, ch in enumerate(chars)}
+self.int_to_string = {i: ch for i, ch in enumerate(chars)}
+
+# Encode text to integers
+encoded_data = [self.string_to_int[c] for c in text_data]
+
+# Convert to tensor
+self.data = torch.tensor(encoded_data, dtype=torch.long)
+\end{minted}
+
+\noindent\textbf{Explanation:}  
+The \texttt{set()} function in line 2 creates a set object containing each distinct character in our input text, which is then converted to a sorted list for easier handling.  
+Lines 3 and 4 then define dictionaries that map each character to an integer and the other way around.  
+Line 7 then applies this encoding of characters to integers to our dataset,  
+and line 10 transforms this dataset into a tensor.  
+We use \texttt{dtype=torch.long} because it represents full integer values and can support a rich dictionary (although smaller integer types would also work in this specific example).
+\end{document}
+
+
+
+
+%%%%%%%%% end snippet

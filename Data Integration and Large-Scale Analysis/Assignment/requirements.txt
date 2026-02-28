@@ -1,0 +1,5 @@
+numpy==1.25.2
+pandas==2.0.3
+scikit-learn==1.7.2
+imbalanced-learn==0.14.0
+ipykernel==6.29.0

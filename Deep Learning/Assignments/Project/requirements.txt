@@ -1,0 +1,10 @@
+torch>=2.1
+torchvision>=0.16
+numpy>=1.26
+scipy>=1.11
+pandas>=2.0
+matplotlib>=3.7
+pillow>=10.0
+jupyter>=1.0
+notebook>=7.0
+ipykernel>=6.25

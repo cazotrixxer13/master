@@ -1,0 +1,10 @@
+numpy==2.3.3
+matplotlib==3.10.6
+scipy==1.16.2
+tqdm==4.67.1
+jax==0.8.1
+flax==0.12.1
+numpyro==0.19.0
+tqdm==4.67.1
+optax==0.2.6
+gymnasium[toy-text]==1.0.0

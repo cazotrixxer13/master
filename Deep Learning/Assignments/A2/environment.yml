@@ -1,0 +1,16 @@
+name: deeplearning
+channels:
+  - pip
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scikit-learn
+  - ipykernel
+  - matplotlib
+  - pip
+  - pip:
+      - torch==2.4.1
+      - torchvision==0.19.1
+      - torchaudio==2.4.1

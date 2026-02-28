@@ -1,0 +1,1231 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{cancel}
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+% graphics
+\usepackage{tikz}
+\usepackage{pythonhighlight}
+\usepackage{graphicx}
+\usepackage{subcaption}
+% Related to math
+\usepackage{longtable}
+%\usepackage[ruled,vlined,noline]{algorithm2e}
+\usepackage{cleveref}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\definecolor{myPurple}{rgb}{.8,0,1}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\vec}[1]{\textbf{#1}}
+\newcommand{\mat}[1]{\textbf{\MakeUppercase{#1}}}
+\newcommand{\norm}[1]{\Vert#1\Vert}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\geometry{margin=2.5cm}
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \begin{huge}
+        %% Update assignment number here
+            \textbf{Assignment 1}
+        \end{huge}
+    \end{center}
+
+    \begin{center}
+        \begin{large}
+            Probabilistic Decision Making VU, WS 2025/26
+        \end{large}
+    \end{center}
+
+    \begin{center}
+        \begin{tabularx}{\textwidth}{|>{\hsize=.33\hsize}X|>{\hsize=.33\hsize}X|>{\hsize=.33\hsize}X|} 
+            \hline
+            \multicolumn{3}{|c|}{\textbf{Team Members}} \\
+            \hline
+            Last name & First name & Matriculation Number \\
+            \hline
+            Enis & Jusic & 12004830 \\
+            \hline
+            Lal & Vinayak & 12333144 \\
+            \hline
+
+        \end{tabularx}
+    \end{center}
+\end{titlepage}
+
+\newpage
+\section*{Task 1--Probability Spaces [5 Points]}
+
+\subsection*{Task 1.1 [1.5 Points]}
+For each of the following candidates $(\Omega, \mathcal{F})$, decide whether $\mathcal{F}$ is a $\sigma$-algebra on the set $\Omega$. Justify your answer in each case. $P(A)$ denotes the powerset of $A$, i.e., the set of all subsets of A.
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\Omega = \{1,2,3,4,5,6\}$, $\mathcal{F} = \{\emptyset, \Omega, \{1,2\}, \{3,4\}, \{5,6\}, \{1,2,3,4\}, \{1,2,5,6\}, \{3,4,5,6\}\}$.
+    \item $\Omega = \mathbb{R}$, $\mathcal{F} = P(\Omega)$.
+    \item $\Omega = \mathbb{N}$, $\mathcal{F} = \{A \subseteq \Omega : A \text{ finite or } \Omega \setminus A \text{ finite}\}$.
+    \item $\Omega = \mathbb{N}$, $\mathcal{F} = \{A \subseteq \Omega : A \text{ countable or } \Omega \setminus A \text{ countable}\}$.
+\end{enumerate}
+
+
+\section*{1.1}
+
+For this task, we are using the definition (from the slides) of a $\sigma$-algebra, where $\mathcal{F}$ is called a $\sigma$-algebra over $\Omega$ if:
+
+\begin{enumerate}
+    \item $\Omega \in \mathcal{F}$
+    \item $\mathcal{F}$ is closed under complement: if $A \in \mathcal{F}$, then also $A^c = \Omega \setminus A \in \mathcal{F}$
+    \item $\mathcal{F}$ is closed under countable unions: if $A_1, A_2, \ldots \in \mathcal{F}$, then also $\bigcup_{i=1}^\infty A_i \in \mathcal{F}$
+\end{enumerate}
+
+It also follows that:
+\begin{itemize}
+    \item $\emptyset \in \mathcal{F}$
+    \item $\mathcal{F}$ is closed under countable intersections: if $A_1, A_2, \ldots \in \mathcal{F}$, then also $\bigcap_{i=1}^\infty A_i \in \mathcal{F}$
+\end{itemize}
+
+\subsection*{(a)}
+$\Omega = \{1,2,3,4,5,6\}$, $\mathcal{F} = \{\emptyset, \Omega, \{1,2\}, \{3,4\}, \{5,6\}, \{1,2,3,4\}, \{1,2,5,6\}, \{3,4,5,6\}\}$\\\\
+\textbf{Yes, this is a $\sigma$-algebra.}\\\\
+The complement of each set is also listed in $\mathcal{F}$:
+
+\[
+\begin{aligned}
+\emptyset &\leftrightarrow \Omega \\
+\{1,2\} &\leftrightarrow \{3,4,5,6\} \\
+\{3,4\} &\leftrightarrow \{1,2,5,6\} \\
+\{5,6\} &\leftrightarrow \{1,2,3,4\}
+\end{aligned}
+\]
+Also, $\mathcal{F}$ is closed under countable unions:
+
+\[
+\begin{aligned}
+\{1,2\} \cup \{3,4\} &= \{1,2,3,4\} \\
+\{1,2\} \cup \{5,6\} &= \{1,2,5,6\} \\
+\{3,4\} \cup \{5,6\} &= \{3,4,5,6\} \\
+\{1,2\} \cup \{3,4\} \cup \{5,6\} &= \Omega\\
+\{1,2,3,4\} \cup \{5,6\} &= \Omega \\
+\{1,2,5,6\} \cup \{3,4\} &= \Omega \\
+\{3,4,5,6\} \cup \{1,2\} &= \Omega
+\end{aligned}
+\]
+Any set $\cup$ $\Omega = \Omega$. \\
+Any set $\cup$ $\emptyset = $ the set itself. \\
+Thus, $\mathcal{F}$ satisfies all properties of a $\sigma$-algebra. 
+
+\subsection*{(b) $\Omega = \mathbb{R}$, $\mathcal{F} = P(\Omega)$}
+\textbf{Yes, this is a $\sigma$-algebra.}\\\\
+The power set of any set is always a $\sigma$-algebra.
+This is because:
+
+\begin{enumerate}
+    \item By definition of the powerset, $\Omega = \mathbb{R}$ is a subset of itself, and so $\mathbb{R} \in \mathcal{P}(\mathbb{R})$.
+    
+    \item Let $A \in \mathcal{F} = \mathcal{P}(\mathbb{R})$. Then $A \subseteq \mathbb{R}$, and that means that the complement
+    $\mathbb{R} \setminus A$ is also a subset of $\mathbb{R}$. Therefore $\mathbb{R} \setminus A \in \mathcal{P}(\mathbb{R}) = \mathcal{F}$.
+    
+    \item Let $A_i$ be a countable family with $A_i \in \mathcal{F}$ for all $i$.
+    Then each $A_i \subseteq \mathbb{R}$, and so the union $\bigcup_{i=1}^{\infty} A_i$ is again a subset of $\mathbb{R}$.
+    Hence,
+    \[
+        \bigcup_{i=1}^{\infty} A_i \in \mathcal{P}(\mathbb{R}) = \mathcal{F}.
+    \]
+\end{enumerate}
+
+\subsection*{(c) $\Omega = \mathbb{N}$, $\mathcal{F} = \{A \subseteq \Omega : A \text{ finite or } \Omega \setminus A \text{ finite}\}$}
+\textbf{No, this is not a $\sigma$-algebra.}\\\\
+For the complements, we have two options:
+\begin{enumerate}
+    \item If $A$ is finite, the complement is cofinite, still $\in \mathcal{F}$.
+    \item If $A$ is cofinite, the complement is finite, still $\in \mathcal{F}$.
+\end{enumerate}
+But $\mathcal{F}$ is not closed under \underline{countable} unions.\\
+Let $A_k$ be finite sets of $\mathbb{N}$ with one element each, being odd numbers:
+\[
+A_1 = \{1\}, A_2 = \{3\}, A_3 = \{5\}, \dots
+\]
+If we take their countable union,
+\[
+\bigcup_{k=1}^{\infty} A_k = \{1,3,5,\dots\},
+\]
+this set becomes infinite, and also the complement of $A_k$ the even numbers is infinite too.  
+This breaks the definition of a $\sigma$-algebra even though it is closed under complements it is not closed under countable unions. 
+
+\subsection*{(d) $\Omega = \mathbb{N}$, $\mathcal{F} = \{A \subseteq \Omega : A \text{ countable or } \Omega \setminus A \text{ countable}\}$}
+\textbf{Yes, this is a $\sigma$-algebra.}\\\\
+Every subset of $\Omega = \mathbb{N}$ is countable since $\mathbb{N}$ itself is countable by definition. By taking the same argument as in we defined in (b) that  $\mathcal{F} = \mathcal{P}(\Omega)$, which is always a $\sigma$-algebra, we conclude $\mathcal{F}$ to be a $\sigma$-algebra.
+
+\begin{enumerate}
+    \item It contains $\Omega$, so $\Omega \in \mathcal{P}(\Omega)$.
+    \item If $A \in \mathcal{P}(\Omega)$, then its complement $\Omega \setminus A$ is also a subset of $\Omega$, 
+    so $\Omega \setminus A \in \mathcal{P}(\Omega)$.
+    \item Any countable union of subsets of $\Omega$ is again a subset of $\Omega$, 
+    thus $\bigcup_{i=1}^{\infty} A_i \in \mathcal{P}(\Omega)$.
+\end{enumerate}
+The countable union of countable sets is again countable and therefore $\mathcal{F} = \mathcal{P}(\Omega)$ is a $\sigma$-algebra. 
+
+\subsection*{Task 1.2 [1.5 Points]}
+For each of the following candidates $(\Omega, \mathcal{F})$, decide whether $\mathcal{F}$ is a $\sigma$-algebra on the set $\Omega$. If you think $\mathcal{F}$ is not a $\sigma$-algebra on $\Omega$, provide the smallest $\sigma$-algebra on $\Omega$ that contains all sets $\in$ $\mathcal{F}$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\Omega = \{1,2,3,4,5,6\}$, $\mathcal{F} = \{\emptyset, \Omega, \{1,2\}, \{3,4,5,6\}, \{1,3\}, \{2,4,5,6\}\}$.
+    \item $\Omega = \{1,2,3,4,5,6\}$, $\mathcal{F} = \{\emptyset, \Omega, \{2,4,6\}, \{1,3,5\}, \{1,2,3\}, \{4,5,6\}\}$.
+    \item $\Omega = \{1,2,3,4,5\}$, $\mathcal{F} = \{\emptyset, \Omega, \{1,2\}, \{3,4,5\}, \{1,2,3,4\}, \{5\}, \{1,2,5\}\}$.
+\end{enumerate}
+
+\section*{1.2}
+We again use the definition above from the slide, closure under complements, closure under countable unions.
+
+\subsection*{(a) $\Omega=\{1,2,3,4,5,6\}$, $\mathcal F=\{\emptyset,\Omega,\{1,2\},\{3,4,5,6\},\{1,3\},\{2,4,5,6\}\}$}
+\textbf{No, this is not a $\sigma$-algebra.}\\\\
+Basically the unions of the sets are missing which again introduce new complement sets.
+Smallest $\sigma$-algebra:
+\[
+\begin{aligned}
+&\Big\{\emptyset,\ \Omega,\ \{1\},\ \{2\},\ \{3\},\ \{4,5,6\},\ \{1,2\},\ \{1,3\},\ \{1,4,5,6\}, \{2,3\},\ \\ 
+&\{2,4,5,6\},\ \{3,4,5,6\},\ \{1,2,3\},\ \{1,2,4,5,6\},\ \{1,3,4,5,6\},\ \{2,3,4,5,6\}\Big\}.
+\end{aligned}
+\]
+For each set we have the complement and F is now closed under countable unions.
+
+\subsection*{(b) $\Omega=\{1,2,3,4,5,6\}$, $\mathcal F=\{\emptyset,\Omega,\{2,4,6\},\{1,3,5\},\{1,2,3\},\{4,5,6\}\}$}
+\textbf{No, this is not a $\sigma$-algebra.}\\\\
+Again the unions of the sets are missing which introduce new complement sets.
+Smallest $\sigma$-algebra:
+\[
+\begin{aligned}
+&\Big\{\emptyset,\ \Omega, \{2,4,6\}, \{1,3,5\}, \{1,2,3\}, \{4,5,6\}, \{1,2,3,4,6\}, \{5\}, \\&\{2,4,5,6\}, \{1,3\}, \{1,2,3,5\}, \{4,6\}, \{1,3,4,6\}, \{2,5\}, \{2\}, \{1,3,4,5,6\}\Big\}.
+\end{aligned}
+\]
+For each set we have the complement and F is now closed under countable unions.
+
+\subsection*{(c) $\Omega=\{1,2,3,4,5\}$, $\mathcal F=\{\emptyset,\Omega,\{1,2\},\{3,4,5\},\{1,2,3,4\},\{5\},\{1,2,5\}\}$}
+\textbf{No, this is not a $\sigma$-algebra.}\\\\
+Here only one complement $\{3,4\}$ of $\{1,2,5\}$ is missing.\\
+So the smalles $\sigma$-algebra:
+\[
+\Big\{\emptyset,\Omega,\{1,2\},\{3,4,5\},\{1,2,3,4\},\{5\},\{1,2,5\},\{3,4\}\Big\}.
+\]
+For each set we now have the complement and F is closed under countable unions.
+
+\subsection*{Task 1.3 [1 Point]}
+For each of the following $(\Omega, \mathcal{F}, \mathbb{P})$, decide whether it is a valid probability triple. Justify your answer in each case.
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\Omega = \{1,2,3,4,5\}, \quad \mathcal{F} = P(\Omega), \quad \mathbb{P}(A) = \sum_{n \in A} p_n,$ with $(p_1,\dots,p_5) = (0.2,0.3,0.4,0.1,0)$.
+    \item $\Omega = \mathbb{N} \setminus \{0\}, \quad \mathcal{F} = P(\Omega), \quad \mathbb{P}(A) = \sum_{n \in A} \frac{1}{2^n}$.
+    \item $\Omega = \mathbb{N} \setminus \{0\}, \quad \mathcal{F} = P(\Omega), \quad \mathbb{P}(A) = \sum_{n \in A} \frac{1}{n^2}$.
+    \item $\Omega = [0,1], \quad \mathcal{F} = P(\Omega), \quad \mathbb{P}(A) = 0.6\,\delta_0(A) + 0.4\,\delta_1(A)$ \quad with $\delta_x(A) :=
+    \begin{cases}
+        1 & \text{if } x \in A,\\
+        0 & \text{if } x \notin A.
+    \end{cases}$
+
+\end{enumerate}
+
+
+\newpage
+
+\section*{1.3}
+For each candidate $(\Omega,\mathcal F,\mathbb P)$ we will decide if it is a probability triple which is again defined in the slides as follows:
+
+\begin{itemize}
+    \item Let $\Omega$ be a non-empty set (sample space),
+    \item $\mathcal{F}$ be a sigma-algebra over $\Omega$
+    \item $\mathbb{P}: \mathcal{F} \mapsto [0,1]$ be a function (probability measure) with
+    \begin{itemize}
+        \item $\mathbb{P}(\Omega) = 1$
+        \item For any disjoint $A_1, A_2, A_3, \ldots$ from $\mathcal{F}$,
+        \[
+            \mathbb{P}\!\left( \bigcup_{i=1}^{\infty} A_i \right)
+            = \sum_{i=1}^{\infty} \mathbb{P}(A_i)
+            \quad \text{(sigma-additivity)}
+        \]
+    \end{itemize}
+    (Note that this includes finite unions as well, by setting all but finitely many $A_i = \emptyset$.)
+\end{itemize}
+Any such triple $(\Omega, \mathcal{F}, \mathbb{P})$ is called a probability space.  
+
+\subsection*{(a) $\Omega=\{1,2,3,4,5\}, \mathcal F=\mathcal P(\Omega),
+\mathbb P(A)=\sum_{n\in A}p_n,\ (p_1,\dots,p_5)=(0.2,0.3,0.4,0.1,0)$}
+\textbf{Yes, this is a probability space.}\\\\
+It holds that $0 \le p_n \le 1$ and 
+\[
+\sum_{n=1}^5 p_n=0.2+0.3+0.4+0.1+0=1
+\]
+and so $\mathbb P(\Omega)=1$.
+
+\subsection*{(b) $\Omega=\mathbb N\setminus\{0\},\quad \mathcal F=\mathcal P(\Omega),\quad
+\mathbb P(A)=\sum_{n\in A}2^{-n}$}
+\textbf{Yes, this is a probability space.}\\\\
+This is a geometric series with 
+\[
+\sum_{n=1}^\infty \frac{1}{2^n}=\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+...=1,
+\]
+so $\mathbb P(\Omega)=1$ and also $0\le \mathbb P(A)\le 1$ for all $A$.
+
+\subsection*{(c) $\Omega=\mathbb N\setminus\{0\}, \mathcal F=\mathcal P(\Omega),
+\mathbb P(A)=\sum_{n\in A}n^{-2}$}
+\textbf{No, this is not a probability space.}\\\\
+We have again a known series called the Basel Problem
+\[
+\mathbb P(\Omega)=\sum_{n=1}^\infty \frac{1}{n^2}=\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+...=\frac{\pi^2}{6}>1, 
+\]
+so $\mathbb P(\Omega)\neq 1$.
+
+\subsection*{(d)  $\Omega=[0,1],\quad \mathcal F=\mathcal P(\Omega),\quad
+\mathbb P(A)=0.6\,\delta_0(A)+0.4\,\delta_1(A)$}
+\textbf{Yes, this is a probability space.}\\\\
+Clearly $0\le\mathbb P(A)\le 1$ and $\mathbb P(\Omega)=0.6+0.4=1$.
+If $A_i$ are disjoint, at most one $A_i$ contains $0$ and at most one contains $1$, where
+\begin{align*}
+\mathbb P\!\left(\bigcup_i^2 A_i\right)
+&=0.6\,\delta_0\!\left(\bigcup_i^2 A_i\right)+0.4\,\delta_1\!\left(\bigcup_i^2 A_i\right)\\
+&=\sum_i \big(0.6\,\delta_0(A_i)+0.4\,\delta_1(A_i)\big)\\
+&=0.6\times1+0.4\times1\\
+&=1
+\end{align*}
+so $\mathbb P(\Omega)=1$.
+
+
+\section*{Task 1.4 [1 Points]}
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ and $(\Omega, \mathcal{F}, \mathbb{Q})$ be two probability triples, i.e., 
+$\Omega$ is a non-empty sample space, $\mathcal{F}$ is a $\sigma$-algebra on $\Omega$, 
+and $\mathbb{P}, \mathbb{Q} : \mathcal{F} \to [0,1]$ are probability measures.
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Assume that
+\[
+    \mathbb{P}(A) = \mathbb{Q}(A) \quad \forall A \in \mathcal{F} \text{ where } \mathbb{P}(A) \le \frac{1}{2}.
+\]
+Prove the following statement:
+\[
+    \mathbb{P}(A) = \mathbb{Q}(A) \quad \forall A \in \mathcal{F}.
+\]
+
+\item Assume now instead that
+\[
+    \mathbb{P}(A) = \mathbb{Q}(A) \quad \forall A \in \mathcal{F} \text{ where } \mathbb{P}(A) < \frac{1}{2}.
+\]
+Do we still have $\mathbb{P}(A) = \mathbb{Q}(A)$ for all $A \in \mathcal{F}$? 
+If you think so, prove this. 
+If you believe the opposite, provide a counterexample, 
+i.e., a concrete example of $\Omega, \mathcal{F}, \mathbb{P}$ and $\mathbb{Q}$ that do not satisfy this.
+\end{enumerate}
+
+\subsection*{1.4}
+Let $(\Omega,\mathcal F,\mathbb P)$ and $(\Omega,\mathcal F,\mathbb Q)$ be probability spaces.
+
+\subsubsection*{(a)}
+
+We know that the probability of the set A $\mathbb P(A)$ + its complement $\mathbb P(A^c)$ together must equal to $\mathbb P(\Omega)=1$ by the definition of probability spaces.
+\[
+\mathbb P(A)+\mathbb P(A^c)=\mathbb P(\Omega)=1.
+\]
+So it has to hold that either $\mathbb P(A)\le \tfrac12$ or $\mathbb P(A^c)\le \tfrac12$.\\
+If $\mathbb P(A)\le\tfrac12$, the assumption already gives us $\mathbb Q(A)=\mathbb P(A)$.\\
+But if the complement $\mathbb P(A^c)\le\tfrac12$, we also have from the assumption that $\mathbb P(A^c)=\mathbb Q(A^c)$ holds. That means that we can define $\mathbb Q(A)$ as $1-\mathbb Q(A^c)$ 
+So yes the statement is correct.
+
+\subsubsection*{(b)} 
+The statement can fail with the strict inequality now simply because we exclude $\mathbb P(A)=\frac12$. We can easily construct a counterexample and show that it not holds.\\\\
+Let $\Omega=\{1,2\}$, $\mathcal F=\mathcal P(\Omega)$.\\
+We define $\mathbb P(\{1\})=\mathbb P(\{2\})=\tfrac12$ where obviously $\mathbb P(\emptyset)=0$, $\mathbb P(\Omega)=1$ holds automatically to be a proper probability measure.\\
+On the counterpart we now define $\mathbb Q(\{1\})=\tfrac23$, $\mathbb Q(\{2\})=\tfrac13$, and again $\mathbb Q(\emptyset)=0$, $\mathbb Q(\Omega)=1$. Then both $\mathbb P$ and $\mathbb Q$ are probability measures.
+
+Now the only set with $\mathbb P(A)<\tfrac12$ is $A=\emptyset$. And since we defined $\mathbb P(\emptyset)=0$ but also $\mathbb Q(\emptyset)=0$ it shows that
+\[
+\mathbb P(A)=\mathbb Q(A)\quad\text{for all }A\text{ with }\mathbb P(A)<\tfrac12
+\]
+is satisfied. But actually we have defined that $\mathbb P(\{1\})=\tfrac12$ and also $\mathbb Q(\{1\})=\tfrac23$ where clearly $\tfrac12 \neq \tfrac23$ so $\mathbb P\ne\mathbb Q$ on $\mathcal F$.
+It does not hold when the assumption uses $<$ instead of $\le$.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 1 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\centering Task 2 : Sigma-Algebras}
+
+\hrule
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.1 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{5mm}
+
+\subsection*{Task 2.1}
+\vspace{2mm}
+\begin{normalsize}
+    A set of sets $\mathit{E}$ is a sigma-algebra over a finite set $\Omega$ iff $\mathit{E}$ meets these conditions,
+    \begin{enumerate}
+        \item $\Phi , \Omega \in \mathit{E}$
+        \item If a set $\mathit{A} \in \mathit{E}$ then $\mathit{A}^{\mathit{c}} \in \mathit{E}$
+        \item if sets $\mathit{A}_{1}, \mathit{A}_{2}, . . . \in \mathit{E}$ then also $\bigcup_{i=1}^{\infty} \mathit{A}_{i} \in \mathit{E}$
+    \end{enumerate}
+\end{normalsize}
+
+\vspace{2mm}
+
+\begin{algorithm}
+\caption{To check of the given set of sets $\mathit{E}$ is a $\sigma-$algebra over a finite set $\Omega$}
+\begin{algorithmic}[1]
+\Require Sample space $\Omega$, collection of sets $\mathcal{E}$
+\State Let $\varnothing \gets \Omega - \Omega$
+\If{$\Omega \notin \mathcal{E}$} \State \Return \textbf{false} \EndIf
+\If{$\varnothing \notin \mathcal{E}$} \State \Return \textbf{false} \EndIf
+
+\ForAll{$A \in \mathcal{E}$}
+    \If{$\Omega - A \notin \mathcal{E}$}
+        \State \Return \textbf{false}
+    \EndIf
+\EndFor
+
+\State $U \gets \varnothing$
+\ForAll{$A \in \mathcal{E}$}
+    \State $U \gets U \cup A$
+\EndFor
+\If{$U \notin \mathcal{E}$} \State \Return \textbf{false} \EndIf
+
+\State \Return \textbf{true}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{normalsize}
+    The time the implemented algorithm takes is $\mathbf{O(|E|^2)}$
+\end{normalsize}
+
+\vspace{2mm}
+\begin{normalsize}
+    \textbf{Test Cases:}
+\end{normalsize}
+
+{\renewcommand{\arraystretch}{1.05}\large
+\begin{longtable}{p{0.23\textwidth} p{0.50\textwidth} p{0.20\textwidth}}
+\hline
+\textbf{$\Omega$} & \textbf{$\mathit{E}$} & \textbf{Is Sigma Algebra?} \\
+\hline
+\endfirsthead
+
+\hline
+\endfoot
+
+$\{1,2,3,4,5,6\}$ &
+\(\varnothing\), \(\Omega\) &
+True \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\varnothing\), \(\{1,3,5\}\), \(\{2,4,6\}\), \(\Omega\) &
+True \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\varnothing\), \(\{1,2\}\), \(\{3,4\}\), \(\{5,6\}\), \(\{3,4,5,6\}\), \(\{1,2,5,6\}\), \(\{1,2,3,4\}\), \(\Omega\) &
+True \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\varnothing\), \(\{1\}\), \(\{2,3,4,6\}\), \(\Omega\) &
+False \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\mathcal{P}(\Omega)\) &
+True \\
+
+\end{longtable}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.1 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.2 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Task 2.2}
+\vspace{2mm}
+
+\begin{algorithm}[H]
+\caption{Construction of the Smallest Sigma-Algebra Containing a Given Collection of Sets}
+\begin{algorithmic}[1]
+\Require Sample space $\Omega$, collection of sets $\mathcal{E}$
+\Ensure Smallest sigma-algebra on $\Omega$ containing all sets in $\mathcal{E}$ that are subsets of $\Omega$
+\State Initialize $\text{smallest\_sigma\_algebra} \gets [\ ]$
+\State Initialize $\text{valid\_sets} \gets [\ ]$
+\State Let $\varnothing \gets \Omega - \Omega$
+\For{each $A$ in $\mathcal{E}$}
+    \If{$A \subseteq \Omega$}
+        \State Append $A$ to $\text{valid\_sets}$
+    \EndIf
+\EndFor
+\State Append all elements of $\text{valid\_sets}$ to $\text{smallest\_sigma\_algebra}$
+\If{$\Omega \notin \text{valid\_sets}$}
+    \State Append $\Omega$ to $\text{smallest\_sigma\_algebra}$
+\EndIf
+\If{$\varnothing \notin \text{valid\_sets}$}
+    \State Append $\varnothing$ to $\text{smallest\_sigma\_algebra}$
+\EndIf
+\For{each $A$ in $\text{valid\_sets}$}
+    \State Let $A^{c} \gets \Omega - A$
+    \If{$A^{c} \notin \text{smallest\_sigma\_algebra}$}
+        \State Append $A^{c}$ to $\text{smallest\_sigma\_algebra}$
+    \EndIf
+\EndFor
+\State \Return $\text{smallest\_sigma\_algebra}$
+\end{algorithmic}
+\end{algorithm}
+
+\vspace{2mm}
+\begin{normalsize}
+    \textbf{Test Cases:}
+\end{normalsize}
+
+{\renewcommand{\arraystretch}{1.05}\large
+\begin{longtable}{p{0.23\textwidth} p{0.25\textwidth} p{0.45\textwidth}}
+\hline
+\textbf{$\Omega$} & \textbf{$\mathit{E}$} & \textbf{Smallest Sigma Algebra} \\
+\hline
+\endfirsthead
+
+\hline
+\endfoot
+
+$\{1,2,3,4,5,6\}$ &
+\(\{1,2\}\), \(\{8,4\}\) &
+\(\varnothing\), \(\{1,2\}\), \(\{3,4,5,6\}\), \(\Omega\) \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\{1\}\) &
+\(\varnothing\), \(\{1\}\), \(\{2,3,4,5,6\}\), \(\Omega\) \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\{3,4,5\}\) &
+\(\varnothing\), \(\{3,4,5\}\), \(\{1,2,6\}\), \(\Omega\) \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\varnothing\) &
+\(\varnothing\), \(\Omega\) \\
+
+$\{1,2,3,4,5,6\}$ &
+\(\Omega\) &
+\(\varnothing\), \(\Omega\) \\
+
+\end{longtable}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.2 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.3 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Task 2.3}
+\vspace{2mm}
+
+\begin{large}
+    \textbf{If $\mathit{F}_{1}$ and $\mathit{F}_{2}$ are two sigma algebras over $\Omega$}
+
+    \textbf{To Check if $\mathit{F}_{1} \cap \mathit{F}_{2}$ is a sigma algebra over $\Omega$}
+\end{large}
+
+\vspace{2mm}
+
+\begin{large}
+\begin{enumerate}
+    \item Since, $\Omega \in \mathit{F}_{1}$ and $\Omega \in \mathit{F}_{2}$, therefore, $\Omega \in \mathit{F}_{1} \cap \mathit{F}_{2}$ holds True.
+    
+    \item If $\mathit{A} \in \mathit{F}_{1}$ and $\mathit{A} \in \mathit{F}_{2}$, then $\mathit{A} \in \mathit{F}_{1} \cap \mathit{F}_{2}$. Since $\mathit{F}_{1}$ and $\mathit{F}_{2}$ are sigma-algebras, $\mathit{A}^{c} \in \mathit{F}_{1}$ and $\mathit{A}^{c} \in \mathit{F}_{2}$ and hence $\mathit{A}^{c} \in \mathit{F}_{1} \cap \mathit{F}_{2}$
+    
+    \item If $A_1, A_2, . . . \in \mathit{F}_{1} \cap \mathit{F}_{2}$ then $A_1, A_2, . . . \in \mathit{F}_{1}$ and $A_1, A_2, . . . \in \mathit{F}_{2}$.
+    
+    Since $\mathit{F_1}$ and $\mathit{F_2}$ are sigma-algebras, $\bigcup_{i=1}^{\infty} \mathit{A}_{i} \in \mathit{F_1}$ and $\bigcup_{i=1}^{\infty} \mathit{A}_{i} \in \mathit{F_2}$.
+
+    Hence $\bigcup_{i=1}^{\infty} \mathit{A}_{i} \in \mathit{F}_{1} \cap \mathit{F}_{2}$ holds True.
+\end{enumerate}
+\vspace{2mm}
+    Since all the conditions meet, $\mathit{F}_{1} \cap \mathit{F}_{2}$ is a sigma algebra over $\Omega$
+\end{large}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.3 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.4 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Task 2.4}
+\vspace{2mm}
+
+\begin{large}
+    
+    \textbf{If $\mathit{F}_{1}$ and $\mathit{F}_{2}$ are two sigma algebras over $\Omega_1$ and $\Omega_2$}
+
+    \textbf{To Check if $\mathit{F}_{1} \cup \mathit{F}_{2}$ is a sigma algebra over $\Omega_1 \cup \Omega_2$}
+\end{large}
+
+\vspace{2mm}
+
+\begin{large}
+    Since $\Omega_1 \in \mathit{F}_{1}$ and $\Omega_2 \in \mathit{F}_{2}$, we assume $\Omega_1 \cup  \Omega_2 \in \mathit{F}_{1} \cup \mathit{F}_{2}$, but this is not True.
+
+    Let us assume $\Omega_1 = \{1\}$ and $\Omega_2 = \{2\}$ 
+
+    Then $\mathit{F}_{1} = \{ \Phi , \{1\} \}$ and $\mathit{F}_{2} = \{ \Phi , \{2\} \}$
+    
+    $\mathit{F}_{1} \cup \mathit{F}_{2} = \{ \Phi , \{1\}, \{2\} \}$ and does not contain $\Omega_1 \cup \Omega_2 = \{1, 2\}$
+
+    Therefore, $\Omega_1 \cup  \Omega_2 \notin \mathit{F}_{1} \cup \mathit{F}_{2}$
+
+    \vspace{2mm}
+
+    Hence we can say, $\mathit{F}_{1} \cup \mathit{F}_{2}$ is not a sigma algebra over $\Omega_1 \cup \Omega_2$
+\end{large}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----- 2.4 ------%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section*{Task 3 – Distribution Functions [5 Points]}
+
+\subsection*{Task 3.1 [3 points]}
+Let
+\[
+\mathcal{N}(x; \mu, \sigma^2) := 
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\!\left(
+-\frac{(x - \mu)^2}{2\sigma^2}
+\right)
+\]
+denote the univariate \emph{Gaussian} probability density function (pdf) with mean $\mu \in \mathbb{R}$ and variance $\sigma^2 > 0$.
+
+Show that the product of two Gaussian pdfs is again an (unnormalized) Gaussian, i.e.,
+\[
+\mathcal{N}(x; a, \sigma_a^2)\,\mathcal{N}(x; b, \sigma_b^2)
+= Z \cdot \mathcal{N}(x; \mu_{ab}, \sigma_{ab}^2)
+\quad\text{with}\quad
+\mu_{ab} = \frac{\sigma_b^2 a + \sigma_a^2 b}{\sigma_a^2 + \sigma_b^2}
+\quad\text{and}\quad
+\sigma_{ab}^2 = \frac{\sigma_a^2\sigma_b^2}{\sigma_a^2 + \sigma_b^2},
+\]
+where $Z = \int \mathcal{N}(x; a, \sigma_a^2)\,\mathcal{N}(x; b, \sigma_b^2)\,dx$ is the \emph{partition function}, which can also be written as evaluating a different Gaussian at the point $a$: $Z = \mathcal{N}(a; b, \sigma_a^2 + \sigma_b^2).$ Clearly show all steps in your derivation. Your final result should exactly recover the equation $\mathcal{N}(x; a, \sigma_a^2)\,\mathcal{N}(x; b, \sigma_b^2) = \mathcal{N}(a; b, \sigma_a^2 + \sigma_b^2)\,\mathcal{N}(x; \mu_{ab}, \sigma_{ab}^2)$
+with $\mu_{ab}, \sigma_{ab}^2$ as above.
+
+
+\paragraph{Hints:}
+\begin{itemize}
+    \item Write down the product using the definition above and make use of the rules of the \(\exp\) function to
+    transform the product into a single exponential form.
+    \item After some algebraic manipulation, transform the exponent such that the term \(x^2\) has no leading
+    coefficient in the numerator, which should allow you to read off \(\mu_{ab}\) and \(\sigma_{ab}^2\).
+    \item Complete the square in the exponent. The quantity that is added to the resulting quadratic will be
+    related to \(N(a; b, \sigma_a^2 + \sigma_b^2)\).
+    \item \textbf{Remark:} Here, we are multiplying two Gaussian density functions (pointwise). This is not the same
+    as multiplying the corresponding Gaussian random variables.
+\end{itemize}
+
+\subsection*{3.1}
+
+\begin{align*}
+\mathcal N(x;a,\sigma_a^2)\,\mathcal N(x;b,\sigma_b^2)
+&=
+\left(
+  \frac{1}{\sqrt{2\pi\sigma_a^2}}
+  \exp\!\left( -\frac{(x-a)^2}{2\sigma_a^2} \right)
+\right)
+\left(
+  \frac{1}{\sqrt{2\pi\sigma_b^2}}
+  \exp\!\left( -\frac{(x-b)^2}{2\sigma_b^2} \right)
+\right)\\
+&=
+\frac{1}{\sqrt{2\pi\sigma_a^2}}\,
+\frac{1}{\sqrt{2\pi\sigma_b^2}}\,
+\exp\!\left( -\frac{(x-a)^2}{2\sigma_a^2} \right)
+\exp\!\left( -\frac{(x-b)^2}{2\sigma_b^2} \right)
+\\[0.5em]
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\exp\!\left(
+  -\frac{(x-a)^2}{2\sigma_a^2}
+\right)
+\exp\!\left(
+  -\frac{(x-b)^2}{2\sigma_b^2}
+\right)
+\\[0.5em]
+&\quad\text{(Now using the first hint we know that } e^{-a}e^{-b}=e^{-a-b} \text{), so we get}
+\\[0.5em]
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\exp\!\left(
+  -\frac{(x-a)^2}{2\sigma_a^2}
+  -\frac{(x-b)^2}{2\sigma_b^2}
+\right)
+\tag{1}
+\end{align*}\\
+Now we can expand the squares in the exponent to get the first and second binomial formulas
+\begin{align*}
+(x-a)^2 &= x^2 - 2ax + a^2, \\
+(x-b)^2 &= x^2 - 2bx + b^2.
+\tag{2}
+\end{align*}
+and substitute these into the exponent term of what we got in \((1)\)
+\begin{align*}
+&-\frac{(x-a)^2}{2\sigma_a^2}
+-\frac{(x-b)^2}{2\sigma_b^2}
+\\[0.5em]
+&= -\frac{1}{2\sigma_a^2}(x^2 - 2ax + a^2)
+   -\frac{1}{2\sigma_b^2}(x^2 - 2bx + b^2)
+\\[0.5em]
+&= -\frac{1}{2\sigma_a^2}x^2 + \frac{\cancel{2}a}{\cancel{2} \sigma_a^2}x - \frac{a^2}{2\sigma_a^2}
+   -\frac{1}{2\sigma_b^2}x^2 + \frac{\cancel{2}b}{\cancel{2}\sigma_b^2}x - \frac{b^2}{2\sigma_b^2}
+\\[0.5em]
+&= -\left(\frac{1}{2\sigma_a^2} + \frac{1}{2\sigma_b^2}\right)x^2
+   +\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)x
+   -\left(\frac{a^2}{2\sigma_a^2} + \frac{b^2}{2\sigma_b^2}\right).
+\tag{3}
+\end{align*}
+With the second hint we factor out the \(-\frac12\) to make the structure clearer to have $x^2$ with no leading coefficient in the numerator and also negate the +/- signs
+
+\begin{align*}
+&=-\frac12\left[
+ \left(\frac{1}{\sigma_a^2} + \frac{1}{\sigma_b^2}\right)x^2
+ -2\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)x
+ +\left(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\right)
+\right].
+\tag{4}
+\end{align*}
+We can rewrite the current exponent by factoring out \(\frac{1}{\sigma_{ab}^2}\) from the quadratic terms and introduce the combined variance \(\sigma_{ab}^2\) like
+
+\begin{align*}
+\frac{1}{\sigma_{ab}^2}
+:= \frac{1}{\sigma_a^2} + \frac{1}{\sigma_b^2}.
+\tag{5}
+\end{align*}
+If we invert both sides we obtain
+
+\[
+\sigma_{ab}^2
+= \frac{1}{\dfrac{1}{\sigma_a^2} + \dfrac{1}{\sigma_b^2}}
+= \frac{1}{\dfrac{\sigma_a^2 + \sigma_b^2}{\sigma_a^2\sigma_b^2}}
+= \frac{\sigma_a^2\sigma_b^2}{\sigma_a^2 + \sigma_b^2}.
+\tag{6}
+\]
+Substituting \((5)\) in \((4)\) we get
+\begin{align*}
+&=
+-\frac12\left[
+ \frac{1}{\sigma_{ab}^2}x^2
+ -2\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)x
+ +\left(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\right)
+\right]
+\\[0.5em]
+&=
+-\frac{1}{2\sigma_{ab}^2}
+\left[
+ x^2
+ -2\sigma_{ab}^2\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)x
+ +\sigma_{ab}^2\left(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\right)
+\right].
+\tag{7}
+\end{align*}
+So the whole product is now
+
+\begin{align*}
+\mathcal N(x;a,\sigma_a^2)\,\mathcal N(x;b,\sigma_b^2)
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\exp\!\left\{
+-\frac{1}{2\sigma_{ab}^2}
+\left[
+ x^2
+ -2\sigma_{ab}^2\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)x
+ +\sigma_{ab}^2\left(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\right)
+\right]
+\right\}.
+\tag{8}
+\end{align*}
+Now we compare the exponent in (7) with the standard Gaussian exponent form
+
+\[
+-\frac{1}{2\sigma_{ab}^2}
+\left[
+x^2 - 2\mu_{ab}x
+\right].
+\]
+The coefficients of \(x^2\) and \(x\) must match.  
+From (7):\\
+The coefficient of \(x^2\) is \(1\), which already matches.\\
+The coefficient of \(-2x\) is \(\sigma_{ab}^2\left(\frac{a}{\sigma_a^2}+\frac{b}{\sigma_b^2}\right)\).
+So we can now alos read off
+\[
+\mu_{ab}
+= \sigma_{ab}^2\left(\frac{a}{\sigma_a^2}+\frac{b}{\sigma_b^2}\right).
+\tag{9}
+\]
+Substitute (6) into (9)
+
+\begin{align*}
+\mu_{ab}
+&= \frac{\sigma_a^2\sigma_b^2}{\sigma_a^2 + \sigma_b^2}
+\left(\frac{a}{\sigma_a^2}+\frac{b}{\sigma_b^2}\right)
+\\[0.8em]
+&= \frac{\sigma_a^2\sigma_b^2}{\sigma_a^2 + \sigma_b^2}
+\left(\frac{a\sigma_b^2 + b\sigma_a^2}{\sigma_a^2\sigma_b^2}\right)
+\\[0.8em]
+&= \frac{\sigma_b^2a + \sigma_a^2b}{\sigma_a^2 + \sigma_b^2}.
+\tag{10}
+\end{align*}
+Then \((7)\) becomes
+\[
+-\frac{1}{2\sigma_{ab}^2}
+\left[ x^2 - 2\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)\,x + \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big) \right].
+\tag{11}
+\]
+and the quadratic term inside the brackets is actually just
+\[
+x^2 - 2\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)\,x
+=
+x^2 - 2\mu_{ab}x.
+\tag{12}
+\]
+With the third hint we can now complete the square for the expression
+\(x^2 - 2\mu_{ab}x\)
+
+\begin{align*}
+x^2 - 2\mu_{ab}x
+&=
+x^2 - 2\mu_{ab}x + (\mu_{ab}^2 - \mu_{ab}^2)
+\\[0.4em]
+&= (x^2 - 2\mu_{ab}x + \mu_{ab}^2) - \mu_{ab}^2
+\\[0.4em]
+&= (x - \mu_{ab})^2 - \mu_{ab}^2.
+\tag{13}
+\end{align*}
+We substitute this back into \((11)\) and get
+
+\begin{align*}
+x^2 - 2\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)\,x + \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)
+&= (x-\mu_{ab})^2 - \mu_{ab}^2 + \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big).
+\tag{14}
+\end{align*}
+and the whole exponent becomes
+
+\begin{align*}
+-\frac{1}{2\sigma_{ab}^2}
+\left[ x^2 - 2\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)\,x + \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big) \right]
+&=
+-\frac{1}{2\sigma_{ab}^2}
+\left[ (x-\mu_{ab})^2 - \mu_{ab}^2 + \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big) \right]
+\\[0.4em]
+&=
+-\frac{(x-\mu_{ab})^2}{2\sigma_{ab}^2}
++\frac{1}{2\sigma_{ab}^2}\left(\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\right).
+\tag{15}
+\end{align*}
+We can see that this separates into an x-dependent and a constant part just as in the standard Gaussian exponent form we mentioned above.
+Finally insert \((15)\) into \((8)\):
+
+\begin{align*}
+\mathcal N(x;a,\sigma_a^2)\,\mathcal N(x;b,\sigma_b^2)
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\exp\!\left(
+-\frac{(x-\mu_{ab})^2}{2\sigma_{ab}^2}
++\frac{1}{2\sigma_{ab}^2}\bigl(\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\bigr)
+\right)
+\\[0.4em]
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\exp\!\left(\frac{1}{2\sigma_{ab}^2}\bigl(\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\bigr)\right)
+\exp\!\left(-\frac{(x-\mu_{ab})^2}{2\sigma_{ab}^2}\right).
+\tag{16}
+\end{align*}
+Now we multiply and divide by \(\sqrt{2\pi\sigma_{ab}^2}\) to normalize it
+
+\begin{align*}
+\mathcal N(x;a,\sigma_a^2)\,\mathcal N(x;b,\sigma_b^2)
+&=
+\underbrace{
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,\sqrt{2\pi\sigma_{ab}^2}
+\exp\!\left(\frac{1}{2\sigma_{ab}^2}\bigl(\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\bigr)\right)
+}_{=:Z}
+\\
+&\qquad\qquad\times
+\underbrace{
+\frac{1}{\sqrt{2\pi\sigma_{ab}^2}}
+\exp\!\left(-\frac{(x-\mu_{ab})^2}{2\sigma_{ab}^2}\right)
+}_{=\mathcal N(x;\mu_{ab},\sigma_{ab}^2)}\\
+&=\underline{Z \,\mathcal N(x;\mu_{ab},\sigma_{ab}^2).}
+\tag{17}
+\end{align*}
+Now to get the final term $\mathcal{N}(x; a, \sigma_a^2)\,\mathcal{N}(x; b, \sigma_b^2) = \mathcal{N}(a; b, \sigma_a^2 + \sigma_b^2)\,\mathcal{N}(x; \mu_{ab}, \sigma_{ab}^2)$
+with $\mu_{ab}, \sigma_{ab}^2$ we first simplify the constant exponent term in \(Z\).
+We already know \(\sigma_{ab}^2\) from \((6)\).  
+Now simplify the exponent
+\(\dfrac{1}{2\sigma_{ab}^2}(\mu_{ab}^2-\sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big))\) using \((9)\) and getting rid of the $\mu_{ab}$ term
+
+\begin{align*}
+\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)
+&= \sigma_{ab}^4 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)
+\\[0.4em]
+\Rightarrow\quad
+\frac{1}{2\sigma_{ab}^2}\bigl(\mu_{ab}^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\bigr)
+&=
+\frac{1}{2\sigma_{ab}^2}\bigl(\sigma_{ab}^4 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)^2 - \sigma_{ab}^2 \Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)\bigr)
+\\[0.4em]
+&=
+\frac{\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)^2}{2} - \frac{\Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)}{2}.
+\tag{18}
+\end{align*}
+Now we plug in \((6)\) for $\sigma_{ab}^2$:
+
+\begin{align*}
+\sigma_{ab}^2 \Big(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\Big)^2
+&=
+\frac{\sigma_a^2\sigma_b^2}{\sigma_a^2+\sigma_b^2}
+\left(\frac{a}{\sigma_a^2} + \frac{b}{\sigma_b^2}\right)^2
+\\[0.4em]
+&=
+\frac{\sigma_a^2\sigma_b^2}{\sigma_a^2+\sigma_b^2}
+\left(\frac{a\sigma_b^2 + b\sigma_a^2}{\sigma_a^2\sigma_b^2}\right)^2
+\\[0.4em]
+&=
+\frac{\sigma_a^2\sigma_b^2}{\sigma_a^2+\sigma_b^2}
+\cdot
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{\sigma_a^4\sigma_b^4}
+\\[0.4em]
+&=
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}.
+\tag{19}
+\end{align*}
+If we insert it back into \((18)\) we have
+
+\begin{align*}
+\frac{\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}}{2}
+- \frac{\Big(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\Big)}{2}
+&= \frac{1}{2}\left[
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}
+- \left(\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}\right)
+\right]
+\tag{20}
+\end{align*}
+We put the second term over the common denominator \(\sigma_a^2\sigma_b^2\):
+
+\[
+\frac{a^2}{\sigma_a^2} + \frac{b^2}{\sigma_b^2}
+= \frac{a^2\sigma_b^2 + b^2\sigma_a^2}{\sigma_a^2\sigma_b^2}.
+\tag{21}
+\]
+and recieve
+
+\begin{align*}
+&\frac{1}{2}\left[
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}
+- \frac{a^2\sigma_b^2 + b^2\sigma_a^2}{\sigma_a^2\sigma_b^2}
+\right]
+\\[0.4em]
+&= \frac{1}{2}\left[
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}
+- \frac{(a^2\sigma_b^2 + b^2\sigma_a^2)(\sigma_a^2+\sigma_b^2)}{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}
+\right]
+\\[0.4em]
+&= \frac{1}{2}\,
+\frac{(a\sigma_b^2 + b\sigma_a^2)^2
+- (a^2\sigma_b^2 + b^2\sigma_a^2)(\sigma_a^2+\sigma_b^2)}
+{(\sigma_a^2+\sigma_b^2)\sigma_a^2\sigma_b^2}.
+\tag{22}
+\end{align*}
+Now we have to simplify the numerator as this is just a binomial formula and expand
+\[
+(a\sigma_b^2 + b\sigma_a^2)^2
+= a^2\sigma_b^4 + 2ab\sigma_a^2\sigma_b^2 + b^2\sigma_a^4
+\tag{23}
+\]
+and
+\begin{align*}
+(a^2\sigma_b^2 + b^2\sigma_a^2)(\sigma_a^2+\sigma_b^2)
+&= a^2\sigma_b^2\sigma_a^2 + a^2\sigma_b^4
+ + b^2\sigma_a^4 + b^2\sigma_a^2\sigma_b^2.
+\tag{24}
+\end{align*}
+So the the numerator becomes
+
+\begin{align*}
+&\quad (a\sigma_b^2 + b\sigma_a^2)^2
+      - (a^2\sigma_b^2 + b^2\sigma_a^2)(\sigma_a^2+\sigma_b^2)
+\\[0.4em]
+&= \bigl(a^2\sigma_b^4 + 2ab\sigma_a^2\sigma_b^2 + b^2\sigma_a^4\bigr)
+   - \bigl(a^2\sigma_b^2\sigma_a^2 + a^2\sigma_b^4
+           + b^2\sigma_a^4 + b^2\sigma_a^2\sigma_b^2\bigr)
+\\[0.4em]
+&= a^2\sigma_b^4 + 2ab\sigma_a^2\sigma_b^2 + b^2\sigma_a^4
+   -a^2\sigma_b^2\sigma_a^2 - a^2\sigma_b^4
+   -b^2\sigma_a^4 - b^2\sigma_a^2\sigma_b^2
+\\[0.4em]
+&= 2ab\sigma_a^2\sigma_b^2 - a^2\sigma_a^2\sigma_b^2 - b^2\sigma_a^2\sigma_b^2
+\\[0.4em]
+&= \sigma_a^2\sigma_b^2\,(2ab - a^2 - b^2)
+\\[0.4em]
+&= -\sigma_a^2\sigma_b^2\,(a^2 - 2ab + b^2)
+\\[0.4em]
+&= -\sigma_a^2\sigma_b^2\,(a-b)^2.
+\tag{25}
+\end{align*}
+Now we can plug \((25)\) back into \((22)\), and finally obtain the standard gaussian exponent form of Z
+
+\begin{align*}
+&\frac{1}{2}\,
+\frac{-\cancel{\sigma_a^2\sigma_b^2}\,(a-b)^2}
+     {(\sigma_a^2+\sigma_b^2)\cancel{\sigma_a^2\sigma_b^2}}
+\\[0.4em]
+&= -\frac{(a-b)^2}{2(\sigma_a^2+\sigma_b^2)}.
+\tag{26}
+\end{align*}
+Now since we have the exponent already only the normalization factor in \(Z\) needs to brought to standard form, which we can simplify again with replacing $\sigma_{ab}^2$, as follows
+
+\begin{align*}
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\sqrt{2\pi\sigma_{ab}^2}
+&=
+\frac{1}{2\pi\sqrt{\sigma_a^2\sigma_b^2}}\,
+\sqrt{2\pi\frac{\sigma_a^2\sigma_b^2}{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{2\pi\sqrt{\cancel{\sigma_a^2\sigma_b^2}}}\,
+\frac{\sqrt{2\pi}\sqrt{\cancel{\sigma_a^2\sigma_b^2}}}{\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{2\pi}\,
+\frac{\sqrt{2\pi}\sqrt{1}}{\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{2\pi}\,
+\frac{\sqrt{2\pi}\,1}{\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{2\pi}\,
+\frac{\sqrt{2\pi}}{\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{\sqrt{2\pi}}{2\pi\,\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{\cancel{\sqrt{2\pi}}}{(\sqrt{2\pi})\cancel{^2}\,\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{\sqrt{2\pi}\,\sqrt{\sigma_a^2+\sigma_b^2}}
+\\[0.4em]
+&=
+\frac{1}{\sqrt{2\pi(\sigma_a^2+\sigma_b^2)}}.
+\tag{27}
+\end{align*}
+Combining \((26)\) and \((27)\) into Z, we obtain
+
+\[
+Z
+=
+\frac{1}{\sqrt{2\pi(\sigma_a^2+\sigma_b^2)}}\,
+\exp\!\left(-\frac{(a-b)^2}{2(\sigma_a^2+\sigma_b^2)}\right).
+\tag{28}
+\]
+which is exactly the Gaussian density
+
+\[
+Z = \mathcal N\bigl(a; b, \sigma_a^2+\sigma_b^2\bigr).
+\tag{29}
+\]
+and so we obtained the final result where we exactly recovered the equation
+
+\[
+\mathcal N(x;a,\sigma_a^2)\,\mathcal N(x;b,\sigma_b^2)
+=
+\mathcal N\bigl(a; b, \sigma_a^2+\sigma_b^2\bigr)\,
+\mathcal N\bigl(x;\mu_{ab},\sigma_{ab}^2\bigr)
+\]
+
+\newpage
+
+\subsection*{Task 3.2 [2 points]}
+Let \(p : \mathbb{R} \to \mathbb{R}\) denote the probability density function of a continuous random variable
+\(X\), given as
+\[
+p(x) =
+\begin{cases}
+\dfrac{1}{2}x & 0 < x < 2\\[4pt]
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item The corresponding \emph{cumulative distribution function} (CDF) is defined as
+    \[
+    F(x) = \int_{-\infty}^{x} p(z)\,dz.
+    \]
+    Write down \(F(x)\) as a simple function of \(x\) that does not involve an integral (i.e., solve the definite
+    integral).
+
+    \item Compute \(\mathbb P_X([{-0.5}, 0.5] \cup [1.5, 2])\) using only the CDF \(F\) and the properties of a probability measure.
+
+    \item Compute \(\mathbb P_X(\{1\})\). Is it the same as \(p(1)\)?
+
+    \item Prove or refute: \(\mathbb P_X([0, 1]) = \mathbb P_X([0, 1))\).
+
+    \item Analytically compute \(\mathbb E_X[X]\).
+
+    \item We can sample from \(p(x)\) using the \emph{inverse transform sampling} trick: First, sample
+    \(u \sim \mathrm{Unif}([0, 1])\) and then compute \(x = F^{-1}(u)\) where \(F^{-1}\) denotes the inverse of \(F\).
+    The result \(x\) is a proper sample from \(p\). Write down \(F^{-1}(u)\) and implement this sampling
+    procedure in \texttt{monte\_carlo.py} (function \texttt{F\_inv}).
+
+    \item Use this sampling procedure to estimate \(\mathbb E_X[X]\) via Monte Carlo: For all
+    \(N \in \{100, 200, 300, \ldots, 10000\}\), compute the sample mean
+    $\hat{\mathbb E}_N[X] := \frac{1}{N}\sum_{i=1}^{N} x_i$
+    where \(x_i\) are i.i.d.\ samples from \(p\). Plot the sample mean as a function of \(N\) (i.e., \(N\) is shown
+    on the x-axis, and the corresponding sample mean on the y-axis). Draw a horizontal line at the true
+    expectation. Include this plot in your report.
+\end{enumerate}
+
+
+\newpage
+
+\section*{3.2}
+
+The density is
+\[
+p(x)=
+\begin{cases}
+\dfrac{1}{2}x & 0<x<2\\[3pt]
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection*{1.}
+CDF $F(x)$.
+Since we know that $x$ lives in [0,2] we can directly conclude that $x\le0$ = 0.
+
+\[
+F(x)=\int_{-\infty}^x p(z)\,dz=
+\int_{0}^{x}\frac{z}{2}\,dz= \frac{x^{2}}{4}
+\]
+\[
+F(x)=
+\begin{cases}
+0 & x\le 0,\\[4pt]
+\displaystyle \frac{x^{2}}{4} & 0<x<2,\\[8pt]
+1 & x\ge 2.
+\end{cases}
+\]
+
+\subsection*{2.}
+Compute $\mathbb P_X([{-0.5},0.5]\cup[1.5,2])$ using $F$.
+Since $[{-0.5},0.5]$ and $[1.5,2]$ are disjoint we have
+\[
+\mathbb P_X([{-0.5},0.5]\cup[1.5,2])
+= \big(F(0.5)-F(-0.5)\big)+\big(F(2)-F(1.5)\big).
+\]
+With using our defined $F$ from above
+\[
+F(-0.5)=0
+\]
+\[
+F(0.5)=\frac{0.5^2}{4}=\frac{1}{16}
+\]
+\[
+F(1.5)=\frac{1.5^2}{4}=\frac{9}{16}
+\] 
+\[
+F(2)=1
+\]
+So we have
+
+\begin{align*}
+\mathbb P_X([{-0.5},0.5]\cup[1.5,2])&=\frac{1}{16}+\left(1-\frac{9}{16}\right)\\
+&=\frac{1}{16}+\frac{7}{16}\\
+&=\frac{8}{16}\\
+&=\frac{1}{2}
+\end{align*}
+
+\subsection*{3.}
+Compute $\mathbb P_X(\{1\})$ and compare to $p(1)$.\\
+For a pdf with continuous random variables we know that just a single point is always 0 because it has no width and probability density $\neq$ density!
+\[
+\mathbb P_X(\{1\}) = 0.
+\]
+But $p(1)=\tfrac12$ and that's why $\mathbb P_X(\{1\})\neq p(1)$.
+
+\subsection*{4.}
+Prove or refute: $\mathbb P_X([0,1])=\mathbb P_X([0,1))$.\\
+We have $[0,1]=[0,1)\,\cup\,\{1\}$, so
+\[
+\mathbb P_X([0,1])=\mathbb P_X([0,1))+\mathbb P_X(\{1\}).
+\]
+From 3. where we have said that $\mathbb P_X(\{1\})=0$, so it follows that $\mathbb P_X([0,1])=\mathbb P_X([0,1))$ is true.
+
+\subsection*{5.}
+Compute $\mathbb E_X[X]$.
+
+\begin{align*}
+\mathbb E[X]=\int_{x} p(x)\,x\,dx
+&=\int_{0}^{2} \frac{x}{2}\cdot x\,dx\\
+&=\frac12\int_{0}^{2}x^{2}\,dx\\
+&=\frac12\cdot\Big(\frac{2^{3}}{3}-0\Big)\\
+&=\frac12\cdot\frac{2^{3}}{3}\\
+&=\frac12\cdot\frac{8}{3}\\
+&=\frac{8}{6}\\
+&=\frac{4}{3}
+\end{align*}
+So the expectation $\mathbb E_X[X]$ is $\frac{4}{3}$.
+
+\subsection*{6.}
+
+We are given the cumulative distribution function (CDF) of \(X\):
+\[
+F(x) =
+\begin{cases}
+0, & x \le 0, \\[4pt]
+\dfrac{x^2}{4}, & 0 < x < 2, \\[6pt]
+1, & x \ge 2.
+\end{cases}
+\]
+
+\(F(x)\) increases continuously only on the interval \(0 < x < 2\) and on this interval we have
+\[
+u = \frac{x^2}{4}.
+\]
+and \(u\) ranges from \(0\) to \(1\) in that interval because
+\[
+F(0) = 0, \quad F(2) = 1 \quad \Rightarrow \quad 0 < u < 1.
+\]
+So to get the inverse we need to get x on one side
+
+\begin{align*}
+u = \frac{x^2}{4}\\
+4u = x^2\\
+4u = x^2.\\
+x = 2\sqrt{u}
+\end{align*}
+Including the intervals for each case for completeness, we now have the inverse function defined as
+
+\[
+F^{-1}(u) = x =
+\begin{cases}
+0, & u = 0, \\[4pt]
+2\sqrt{u}, & 0 < u < 1, \\[4pt]
+2, & u = 1.
+\end{cases}
+\]
+
+\subsection*{7.}
+
+\begin{figure}[H]
+\centering
+\includegraphics{MC_Estimate.png}
+\end{figure}
+
+\end{document}
