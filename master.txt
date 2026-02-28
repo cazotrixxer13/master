@@ -1,0 +1,59 @@
+Master - Computer Science:
+
+Major: Machine Learning
+Minor: Data Science
+
+1. Semester:
+
+- Deep Learning VO (3 ECTS Pflicht Major)
+- Deep Learning KU (2 ECTS Pflicht Major)
+- Probabilistic Decision Making VU (5 ECTS Pflicht Major)
+- Data Integration and Large-Scale Analysis VU (5 ECTS Minor)
+- Network Science VU (5 ECTS Minor)
+- Systems Engineering and Project Management (1,5 frei wählbare)
+
+2. Semester:
+
+- Machine Learning 2 VO (3 ECTS Pflicht Major)
+- Machine Learning 2 KU (2 ECTS Pflicht Major)
+- Generative Deep Learning VU (5 ECTS Major)
+- Knowledge Discovery and Data Mining 1 VO (3 ECTS Wahl)
+- Knowledge Discovery and Data Mining 1 KU (1,5 ECTS Wahl)
+- Recommender Systems VU (3 ECTS Major)
+- Natural Language Processing VU (5 ECTS Major)
+- Artificial Intelligence 2 VU (3 ECTS Wahl)
+
+3. Semester:
+
+
+- Information Search and Retrieval VU (5 ECTS Major)
+- Automatic Speech Recognition VU (3 ECTS Wahl)
+- Linguistic Foundations of Speech and Language Technology VU (3 ECTS Major)
+- Knowledge Discovery and Data Mining 2 VU (5 ECTS Minor)
+- Advanced Information Retrieval VU (5 ECTS Minor)
+
+4. Semester:
+
+- Principles of Brain Computation VO (3 ECTS Major)
+- Principles of Brain Computation KU (2 ECTS Major)
+
+
+--------------------------------------------------------------------------------
+
+
+Fächerübergreifende Lehrv (9-14):
+- Knowledge Discovery and Data Mining 1 VO (3 ECTS Wahl)
+- Knowledge Discovery and Data Mining 1 KU (1,5 ECTS Wahl)
+- Knowledge Discovery and Data Mining 2 VU (5 ECTS Wahl)
+- Automatic Speech Recognition VU (3 ECTS Wahl)
+- Artificial Intelligence 2 VU (3 ECTS Wahl)
+
+
+
+Wahlmodul Seminare und Projekte (10-15):
+-
+
+
+
+Frei wählbare (6 ECTS):
+- Systems Engineering and Project Management (1,5 Wahl)
